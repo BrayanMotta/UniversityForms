@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="University.App.Views.Forms.LoginPage">
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Center">
+            <StackLayout>
+
+
+                <Frame BackgroundColor="Green" CornerRadius="20">
+                    <Label Text="Login"
+                       FontAttributes="Italic,Bold"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White"
+                       FontSize="Medium"/>
+                </Frame>
+
+                <Label/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Email" FontSize="20" />
+                    <Entry Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter the email" x:Name="Email" />
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Password" FontSize="20" />
+                    <Entry Grid.Row="3" Grid.ColumnSpan="2" Placeholder="Enter the password" x:Name="Password" />
+
+                    <Label/>
+
+
+                </Grid>
+
+                <Button Text="Iniciar" 
+                    BackgroundColor="Green" 
+                    TextColor="White"
+                    CornerRadius="20"
+                    x:Name="Iniciar"
+                    />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
