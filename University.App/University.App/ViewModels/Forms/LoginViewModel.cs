@@ -7,17 +7,34 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class LoginViewModel
+    public class LoginViewModel : BaseViewModel
     {
+        #region Attributes
         private string _email;
         private string _password;
+        #endregion
 
+        #region Properties
+        public string Email
+        {
+            get { return _email; }
+            set { this.SetValue(ref _email, value); }
+        }
+
+        public string Password
+        {
+            get { return _password; }
+            set { this.SetValue(ref _password, value); }
+        }
+        #endregion
+
+        #region Methods
         async void Login()
         {
             var data = new
             {
-                email = _email,
-                passwors = _password
+                email = this.Email,
+                passwors = this.Password
             };
 
             var json = JsonConvert.SerializeObject(data);
@@ -39,8 +56,18 @@ namespace University.App.ViewModels.Forms
                 result = await response.Content.ReadAsStringAsync();
             }
 
-            
 
+
+        }
+        #endregion
+
+        #region Commands
+        public Command LoginCommand { get; set; } 
+        #endregion
+
+        public LoginViewModel()
+        {
+            this.LoginCommand = new Command(Login);
         }
     }
 }

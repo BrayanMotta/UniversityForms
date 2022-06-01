@@ -11,7 +11,7 @@ namespace University.App
         {
             InitializeComponent();
 
-            MainPage = new IMCPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

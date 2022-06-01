@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="University.App.Views.Forms.LoginPage">
+             x:Class="University.App.Views.Forms.LoginPage"
+             xmlns:viewModels="clr-namespace:University.App.ViewModels.Forms">
+             
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <ScrollView HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center">
@@ -33,22 +40,22 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Text="Email" FontSize="20" />
-                    <Entry Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter the email" x:Name="Email" />
+                    <Entry Grid.Row="1" Grid.ColumnSpan="2" Placeholder="Enter the email" x:Name="Email" Text="{Binding Email}"/>
 
                     <Label Grid.Row="2" Grid.Column="0" Text="Password" FontSize="20" />
-                    <Entry Grid.Row="3" Grid.ColumnSpan="2" Placeholder="Enter the password" x:Name="Password" />
+                    <Entry Grid.Row="3" Grid.ColumnSpan="2" Placeholder="Enter the password" x:Name="Password" Text="{Binding Password}" />
 
                     <Label/>
 
 
                 </Grid>
 
-                <Button Text="Iniciar" 
+                <Button Text="Log In" 
                     BackgroundColor="Green" 
                     TextColor="White"
                     CornerRadius="20"
                     x:Name="Iniciar"
-                    />
+                    Command="{Binding LoginCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
