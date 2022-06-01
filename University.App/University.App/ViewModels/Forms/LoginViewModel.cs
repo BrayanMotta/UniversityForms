@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using University.App.DTOs;
+using University.App.Views.Forms;
 using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
@@ -69,15 +70,23 @@ namespace University.App.ViewModels.Forms
 
 
         }
+
+        async void Register()
+        {
+            //TODO: Cambiar a RegisterCommmand
+            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+        }
         #endregion
 
         #region Commands
         public Command LoginCommand { get; set; } 
+        public Command RegisterCommand { get; set; } 
         #endregion
 
         public LoginViewModel()
         {
             this.LoginCommand = new Command(Login);
+            this.RegisterCommand = new Command(Register);
         }
     }
 }

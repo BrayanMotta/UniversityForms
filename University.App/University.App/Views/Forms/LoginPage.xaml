@@ -57,6 +57,13 @@
                     CornerRadius="20"
                     x:Name="Iniciar"
                     Command="{Binding LoginCommand}"/>
+
+                <Button Text="Register" 
+                    BackgroundColor="Green" 
+                    TextColor="White"
+                    CornerRadius="20"
+                    x:Name="Register"
+                    Command="{Binding RegisterCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
