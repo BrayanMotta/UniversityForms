@@ -13,6 +13,7 @@
         <ScrollView HorizontalOptions="FillAndExpand"
                     VerticalOptions="Center">
             <StackLayout>
+                <Image Source="login" HeightRequest="250"/>
 
 
                 <Frame BackgroundColor="Green" CornerRadius="20">

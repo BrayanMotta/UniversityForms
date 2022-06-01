@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using University.App.DTOs;
 using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
@@ -31,11 +32,8 @@ namespace University.App.ViewModels.Forms
         #region Methods
         async void Login()
         {
-            var data = new
-            {
-                email = this.Email,
-                passwors = this.Password
-            };
+            //var data = new{email = this.Email, password = this.Password};
+            var data = new LoginReqDTO{Email = this.Email, Password = this.Password};
 
             var json = JsonConvert.SerializeObject(data);
             var req = new StringContent(json, Encoding.UTF8, "application/json");
@@ -45,15 +43,27 @@ namespace University.App.ViewModels.Forms
             using (var client = new HttpClient())
             {
                 var response = await client.PostAsync(url, req);
+                var statusCode = response.StatusCode;
+                result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
                 {
                     //TODO: Logic App
-                    await Application.Current.MainPage.DisplayAlert("Notify", "Login OK", "Cancel");
+                    var loginRes = JsonConvert.DeserializeObject<LoginResDTO>(result);
+                    var token = loginRes.Token;
+                    await Application.Current.MainPage.DisplayAlert("Notify", token, "Cancel");
+
+                    //redirect
+                    await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
+                }
+                else
+                {
+                    var loginResFail = JsonConvert.DeserializeObject<LoginResFailDTO>(result);
+                    var error = loginResFail.Error;
+                    await Application.Current.MainPage.DisplayAlert("Notify", error, "Cancel");
                 }
 
-                var statusCode = response.StatusCode;
-                result = await response.Content.ReadAsStringAsync();
+                
             }
 
 
