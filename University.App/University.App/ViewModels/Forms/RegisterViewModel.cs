@@ -6,17 +6,32 @@ using System.Text;
 using University.App.DTOs;
 using University.App.Views.Forms;
 using Xamarin.Forms;
+using static University.App.DTOs.RegisterDTO;
 
 namespace University.App.ViewModels.Forms
 {
-    public class LoginViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         #region Attributes
+        //private string _name;
+        //private string _lastName;
         private string _email;
         private string _password;
         #endregion
 
         #region Properties
+        //public string Name
+        //{
+        //    get { return _name; }
+        //    set { this.SetValue(ref _name, value); }
+        //}
+
+        //public string LastName
+        //{
+        //    get { return _lastName; }
+        //    set { this.SetValue(ref _lastName, value); }
+        //}
+
         public string Email
         {
             get { return _email; }
@@ -31,14 +46,14 @@ namespace University.App.ViewModels.Forms
         #endregion
 
         #region Methods
-        async void Login()
+        async void Register()
         {
-            //var data = new{email = this.Email, password = this.Password};
-            var data = new LoginReqDTO{Email = this.Email, Password = this.Password};
+            
+            var data = new RegisterReqDTO { Email = this.Email, Password = this.Password };
 
             var json = JsonConvert.SerializeObject(data);
             var req = new StringContent(json, Encoding.UTF8, "application/json");
-            var url = "https://reqres.in/api/login";
+            var url = "https://reqres.in/api/register";
             var result = string.Empty;
 
             using (var client = new HttpClient())
@@ -50,42 +65,43 @@ namespace University.App.ViewModels.Forms
                 if (response.IsSuccessStatusCode)
                 {
                     //TODO: Logic App
-                    var loginRes = JsonConvert.DeserializeObject<LoginResDTO>(result);
-                    var token = loginRes.Token;
-                    await Application.Current.MainPage.DisplayAlert("Notify", token, "Cancel");
+                    var registerRes = JsonConvert.DeserializeObject<RegisterResDTO>(result);
+                    var token = registerRes.Token;
+                    var id = registerRes.Id;
+                    await Application.Current.MainPage.DisplayAlert("Notify", "id: " + id + " token:" + token, "Cancel");
 
                     //redirect
                     await Application.Current.MainPage.Navigation.PushAsync(new HomePage());
                 }
                 else
                 {
-                    var loginResFail = JsonConvert.DeserializeObject<LoginResFailDTO>(result);
-                    var error = loginResFail.Error;
+                    var registerResFail = JsonConvert.DeserializeObject<RegisterResFailDTO>(result);
+                    var error = registerResFail.Error;
                     await Application.Current.MainPage.DisplayAlert("Notify", error, "Cancel");
                 }
 
-                
+
             }
 
 
 
         }
 
-        async void Register()
+        async void AlreadyRegistered()
         {
-            //TODO: Cambiar a RegisterCommmand
-            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+            
+            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
         #endregion
 
         #region Commands
-        public Command LoginCommand { get; set; } 
-        public Command RegisterCommand { get; set; } 
+        public Command AlreadyRegisteredCommand { get; set; }
+        public Command RegisterCommand { get; set; }
         #endregion
 
-        public LoginViewModel()
+        public RegisterViewModel()
         {
-            this.LoginCommand = new Command(Login);
+            this.AlreadyRegisteredCommand = new Command(AlreadyRegistered);
             this.RegisterCommand = new Command(Register);
         }
     }

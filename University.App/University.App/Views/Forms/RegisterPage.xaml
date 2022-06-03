@@ -1,20 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="University.App.Views.Forms.LoginPage"
+             x:Class="University.App.Views.Forms.RegisterPage"
              xmlns:viewModels="clr-namespace:University.App.ViewModels.Forms">
 
-
     <ContentPage.BindingContext>
-        <viewModels:LoginViewModel/>
+        <viewModels:RegisterViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-
         <StackLayout Spacing="20" Padding="50" VerticalOptions="Center">
 
             <Frame BackgroundColor="Transparent" CornerRadius="20">
-                <Label Text="Log In"
+                <Label Text="Register"
                        FontAttributes="Bold"
                        HorizontalTextAlignment="Center"
                        TextColor="White"
@@ -22,11 +20,12 @@
             </Frame>
 
             <Image Source="login" HeightRequest="250" />
+            <!--<Entry Placeholder="Name" Text="{Binding Name}" />
+            <Entry Placeholder="LastName" Text="{Binding LastName}" />-->
             <Entry Placeholder="Email" Text="{Binding Email}" />
             <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
-            <Button Text="Log In" TextColor="White" BackgroundColor="Black" Command="{Binding LoginCommand}" />
-            <Button Text="Register" TextColor="White" BackgroundColor="Transparent" Command="{Binding RegisterCommand}" />
+            <Button Text="Register" TextColor="White" BackgroundColor="Black" Command="{Binding RegisterCommand}" />
+            <Button Text="Already registered?" TextColor="White" BackgroundColor="Transparent" Command="{Binding AlreadyRegisteredCommand}" />
         </StackLayout>
-
     </ContentPage.Content>
 </ContentPage>
