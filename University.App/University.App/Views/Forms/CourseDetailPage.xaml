@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="University.App.Views.Forms.CourseDetailPage"
+             xmlns:viewModels="clr-namespace:University.App.ViewModels.Forms">
+
+    <ContentPage.BindingContext>
+        <viewModels:CourseDetailViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="50" VerticalOptions="Center">
+            <Label Text="Course ID"/>
+            <Entry Text="{Binding Course.CourseID}"/>
+
+            <Label Text="Tittle"/>
+            <Entry Text="{Binding Course.Title}"/>
+
+            <Label Text="Credits"/>
+            <Entry Text="{Binding Course.Credits}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
