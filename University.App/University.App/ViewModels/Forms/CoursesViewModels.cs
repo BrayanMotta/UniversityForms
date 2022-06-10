@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using University.App.DTOs;
@@ -34,7 +35,8 @@ namespace University.App.ViewModels.Forms
         async void GetCourses()
         {
             this.IsRefreshing = true;
-            var url = "https://apimocha.com/universitybsm/api/Courses";
+            //var url = "https://apimocha.com/universitybsm/api/Courses";
+            var url = "https://62a28504cd2e8da9b00903d5.mockapi.io/api/Courses";
             var result = string.Empty;
 
             using (var client = new HttpClient())
@@ -45,6 +47,7 @@ namespace University.App.ViewModels.Forms
                 if (response.IsSuccessStatusCode)
                 {
                     var courses = JsonConvert.DeserializeObject<ObservableCollection<CourseItemViewModel>>(result);
+                    
                     this.Courses = courses;
                 }
             }

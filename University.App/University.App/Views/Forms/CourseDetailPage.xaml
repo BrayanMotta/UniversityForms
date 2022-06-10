@@ -18,6 +18,35 @@
 
             <Label Text="Credits"/>
             <Entry Text="{Binding Course.Credits}"/>
+
+            <ListView ItemsSource="{Binding Students}"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      RefreshCommand="{Binding RefreshCommand}">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <Frame BorderColor="Black" CornerRadius="14">
+                                <Grid>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" TextColor="Black" Text="{Binding ID}"/>
+                                    <Label Grid.Column="1" TextColor="Black" Text="{Binding FirstName}" HorizontalTextAlignment="Center"/>
+                                </Grid>
+                            </Frame>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
