@@ -10,21 +10,15 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class ClienteDetailViewModel : BaseViewModel
+    public class VehiculoViewModel : BaseViewModel
     {
         #region Attributes
-        private ClienteDTO _cliente;
-        private ObservableCollection<VehiculoDTO> _vehiculo;
+        private ObservableCollection<VehiculoItemViewModel> _vehiculo;
         private bool _isRefreshing;
         #endregion
 
         #region Properties
-        public ClienteDTO Cliente
-        {
-            get { return _cliente; }
-            set { this.SetValue(ref _cliente, value); }
-        }
-        public ObservableCollection<VehiculoDTO> Vehiculo
+        public ObservableCollection<VehiculoItemViewModel> Vehiculo
         {
             get { return _vehiculo; }
             set { this.SetValue(ref _vehiculo, value); }
@@ -37,21 +31,7 @@ namespace University.App.ViewModels.Forms
         }
         #endregion
 
-
-        public ClienteDetailViewModel(ClienteDTO cliente)
-        {
-            this.Cliente = cliente;
-            this.RefreshCommand = new Command(GetVehiculo);
-            this.RefreshCommand.Execute(null);
-        }
-
-        public ClienteDetailViewModel()
-        {
-
-        }
-
-
-
+        #region Methods
         async void GetVehiculo()
         {
             this.IsRefreshing = true;
@@ -67,13 +47,22 @@ namespace University.App.ViewModels.Forms
                 if (response.IsSuccessStatusCode)
                 {
                     var vehiculo = JsonConvert.DeserializeObject<ObservableCollection<VehiculoItemViewModel>>(result);
-                    var vehiculoFilter = vehiculo.Where(x => x.IdCliente == _cliente.ID).ToList();
-                    this.Vehiculo = new ObservableCollection<VehiculoDTO>(vehiculoFilter);
+
+                    this.Vehiculo = vehiculo;
                 }
             }
             this.IsRefreshing = false;
         }
+        #endregion
 
+        #region Commands
         public Command RefreshCommand { get; set; }
+        #endregion
+
+        public VehiculoViewModel()
+        {
+            this.RefreshCommand = new Command(GetVehiculo);
+            this.RefreshCommand.Execute(null);
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace University.App.ViewModels.Forms
         async void GetClientes()
         {
             this.IsRefreshing = true;
-            //var url = "https://apimocha.com/universitybsm/api/Courses";
+            
             var url = "https://62a286bbcd2e8da9b00913a9.mockapi.io/api/Clientes";
             var result = string.Empty;
 

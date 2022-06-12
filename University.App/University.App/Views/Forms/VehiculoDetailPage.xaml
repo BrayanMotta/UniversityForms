@@ -1,25 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="University.App.Views.Forms.ClienteDetailPage"
+             x:Class="University.App.Views.Forms.VehiculoDetailPage"
              xmlns:viewModels="clr-namespace:University.App.ViewModels.Forms">
 
     <ContentPage.BindingContext>
-        <viewModels:ClienteDetailViewModel/>
+        <viewModels:VehiculoDetailViewModel/>
+        
     </ContentPage.BindingContext>
+    
+    
 
     <ContentPage.Content>
         <StackLayout Padding="50" VerticalOptions="Center">
-            <Label Text="ID"/>
-            <Entry Text="{Binding Cliente.ID}"/>
+            <Label Text="Placa"/>
+            <Entry Text="{Binding Vehiculo.VhPlaca}"/>
 
-            <Label Text="Full Name"/>
-            <Entry Text="{Binding Cliente.FullName}"/>
+            <Label Text="Marca"/>
+            <Entry Text="{Binding Vehiculo.VhMarca}"/>
 
-            <Label Text="Telephone"/>
-            <Entry Text="{Binding Cliente.Telephone}"/>
+            <Label Text="Color"/>
+            <Entry Text="{Binding Vehiculo.VhColor}"/>
 
-            <ListView ItemsSource="{Binding Vehiculo}"
+            <Label Text="Modelo"/>
+            <Entry Text="{Binding Vehiculo.VhModelo}"/>
+
+            <ListView ItemsSource="{Binding Empleado}"
                       HasUnevenRows="True"
                       IsPullToRefreshEnabled="True"
                       IsRefreshing="{Binding IsRefreshing}"
@@ -32,17 +38,13 @@
                             <Frame BorderColor="Black" CornerRadius="14">
                                 <Grid>
 
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding OnItemClickCommand}"/>
-                                    </Grid.GestureRecognizers>
-
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0" TextColor="Black" Text="{Binding VhPlaca}"/>
-                                    <Label Grid.Column="1" TextColor="Black" Text="{Binding VhMarca}" HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Column="0" TextColor="Black" Text="{Binding ID}"/>
+                                    <Label Grid.Column="1" TextColor="Black" Text="{Binding FullName}" HorizontalTextAlignment="Center"/>
                                 </Grid>
                             </Frame>
 

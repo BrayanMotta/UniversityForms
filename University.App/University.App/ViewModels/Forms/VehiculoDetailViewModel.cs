@@ -10,24 +10,24 @@ using Xamarin.Forms;
 
 namespace University.App.ViewModels.Forms
 {
-    public class ClienteDetailViewModel : BaseViewModel
+    public class VehiculoDetailViewModel : BaseViewModel
     {
         #region Attributes
-        private ClienteDTO _cliente;
-        private ObservableCollection<VehiculoDTO> _vehiculo;
+        private VehiculoDTO _vehiculo;
+        private ObservableCollection<EmpleadoDTO> _empleado;
         private bool _isRefreshing;
         #endregion
 
         #region Properties
-        public ClienteDTO Cliente
-        {
-            get { return _cliente; }
-            set { this.SetValue(ref _cliente, value); }
-        }
-        public ObservableCollection<VehiculoDTO> Vehiculo
+        public VehiculoDTO Vehiculo
         {
             get { return _vehiculo; }
             set { this.SetValue(ref _vehiculo, value); }
+        }
+        public ObservableCollection<EmpleadoDTO> Empleado
+        {
+            get { return _empleado; }
+            set { this.SetValue(ref _empleado, value); }
         }
 
         public bool IsRefreshing
@@ -38,25 +38,26 @@ namespace University.App.ViewModels.Forms
         #endregion
 
 
-        public ClienteDetailViewModel(ClienteDTO cliente)
+        public VehiculoDetailViewModel(VehiculoDTO vehiculo)
         {
-            this.Cliente = cliente;
-            this.RefreshCommand = new Command(GetVehiculo);
+            this.Vehiculo = vehiculo;
+            this.RefreshCommand = new Command(GetEmpleado);
             this.RefreshCommand.Execute(null);
         }
 
-        public ClienteDetailViewModel()
+        public VehiculoDetailViewModel()
         {
 
         }
 
 
 
-        async void GetVehiculo()
+        #region Methods
+        async void GetEmpleado()
         {
             this.IsRefreshing = true;
-            
-            var url = "https://62a286bbcd2e8da9b00913a9.mockapi.io/api/Vehiculos";
+
+            var url = "https://62a286bbcd2e8da9b00913a9.mockapi.io/api/Empleados";
             var result = string.Empty;
 
             using (var client = new HttpClient())
@@ -66,14 +67,17 @@ namespace University.App.ViewModels.Forms
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var vehiculo = JsonConvert.DeserializeObject<ObservableCollection<VehiculoItemViewModel>>(result);
-                    var vehiculoFilter = vehiculo.Where(x => x.IdCliente == _cliente.ID).ToList();
-                    this.Vehiculo = new ObservableCollection<VehiculoDTO>(vehiculoFilter);
+                    var empleado = JsonConvert.DeserializeObject<ObservableCollection<EmpleadoDTO>>(result);
+                    var empleadoFilter = empleado.Where(x => x.ID == _vehiculo.IdEmpleado).ToList();
+                    this.Empleado = new ObservableCollection<EmpleadoDTO>(empleadoFilter);
                 }
             }
             this.IsRefreshing = false;
         }
+        #endregion
 
-        public Command RefreshCommand { get; set; }
+        #region Commands
+        public Command RefreshCommand { get; set; } 
+        #endregion
     }
 }
