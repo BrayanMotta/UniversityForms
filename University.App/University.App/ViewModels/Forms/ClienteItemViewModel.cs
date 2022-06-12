@@ -15,7 +15,7 @@ namespace University.App.ViewModels.Forms
             await Application.Current.MainPage.DisplayAlert("Notify", $"Selected {this.FullName}", "Cancel");
 
             ClienteDetailPage detailPage = new ClienteDetailPage();
-            //detailPage.BindingContext = new CourseDetailViewModel(this);
+            detailPage.BindingContext = new ClienteDetailViewModel(this);
             await Application.Current.MainPage.Navigation.PushAsync(detailPage);
         }
 
